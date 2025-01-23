@@ -29,4 +29,20 @@ class StudentController extends Controller
         $student->delete();
         return redirect()->back()->with('success','Öğrenci Başarıyla Silindi');
     }
+    public function edit($id){
+        $student = Student::findOrFail($id);
+        return view('students.edit',compact('student'));    
+    }
+    public function update(Request $request, $id)
+    {
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:students,email,' . $id,
+    ]);
+
+    $student = Student::findOrFail($id);
+    $student->update($request->all());
+
+    return redirect('/')->with('success', 'Öğrenci başarıyla güncellendi!');
+}
 }
