@@ -17,7 +17,13 @@
                 {{ session('success') }}
             </div>
         @endif
-
+        <form method="GET" action="/" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Ad veya e-posta ile arayın" value="{{ request('search') }}">
+                <button type="submit" class="btn btn-outline-secondary">Ara</button>
+            </div>
+        </form>
+        
         <form action="{{ route('students.store') }}" method="POST">
             @csrf
             <div class="mb-3">
